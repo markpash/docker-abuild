@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  abuild:
+    build: .
+    privileged: true
+    volumes:
+      - ../aports:/home/${ABUILD_USER}/aports
+      - ./abuild:/home/${ABUILD_USER}/.abuild
+      - ./ccache:/home/${ABUILD_USER}/.cache/ccache
+      - ./iso:/home/${ABUILD_USER}/iso
+      - ./packages:/home/${ABUILD_USER}/packages
+      - ./entrypoint.sh:/entrypoint.sh
+    env_file: .env
+    command: |
+      /entrypoint.sh
